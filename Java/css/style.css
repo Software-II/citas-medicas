@@ -1,0 +1,74 @@
+*{
+	margin: 0px;
+}
+body{
+	background: url(../img/bg.png);
+}
+section{
+	width: 80%;
+	margin: 0px auto;
+	padding-top: 30px;
+}
+
+.cen{
+	background: url(../img/cen.png) no-repeat left;
+	background-size: contain;
+	width: 45%;
+	height: 100px;
+	display: inline-block;
+}
+.min{
+	background: url(../img/min.png) no-repeat right;
+	background-size: contain;
+	width: 45%;
+	height: 100px;
+	display: inline-block;
+}
+.bienvenido, .indicacion{
+	margin-top: 30px;
+	width: 100%;
+	text-align: center;
+	font-size: 3em;
+	color: rgba(120, 49, 49, 1);
+}
+.indicacion{
+	margin-top: -20px;
+	color: #212121;
+	font-size: 2em;
+	margin-bottom: 100px;
+
+}
+.contenedor{
+	width: 100%;
+	height: 100px;
+	text-align: center;}
+.botonClient{
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.26);
+	width: 300px;
+	height: 70px;
+	padding-top: 25px;
+	background: -webkit-linear-gradient(#fff, #ddd);
+	background: -moz-linear-gradient(#fff, #ddd);
+	opacity: 0.5;
+	margin: 0px 50px 0px 50px;
+	border: 1px solid rgba(233, 28, 28, 1);;
+	display: inline-block;
+}
+.texto-boton{
+	width: 90%;
+	margin: 0px auto;
+	vertical-align: middle;
+	font-weight: 300;font-size: 1.5em;color: #212121;
+}
+footer{
+	text-align: center;
+	font-size: 1.5em;
+	color: rgba(120, 49, 49, 1);
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+}
+input{
+	height: 50px;
+	width: 50%;
+}
