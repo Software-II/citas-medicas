@@ -1,6 +1,7 @@
 package dao.factory;
 
 import dao.interfaces.I_GenerarCM;
+import dao.interfaces.I_Medico;
 import dao.interfaces.I_Servicio;
 
 public abstract class DAOFactory {
@@ -10,6 +11,7 @@ public abstract class DAOFactory {
 	
 	public abstract I_GenerarCM getCMDao();
 	public abstract I_Servicio getServicio();
+	public abstract I_Medico getMedico();
 	
 	public static DAOFactory getDaoFactory(int origen){
 		switch (origen) {

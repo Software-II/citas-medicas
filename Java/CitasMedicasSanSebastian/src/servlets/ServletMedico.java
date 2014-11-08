@@ -7,64 +7,63 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.BeanServicio;
-import dao.factory.DAOFactory;
-import dao.interfaces.I_Servicio;
+import com.google.gson.Gson;
 
-@WebServlet("/ServletServicio")
-public class ServletServicio extends HttpServlet {
+import beans.BeanMedico;
+import dao.factory.DAOFactory;
+import dao.interfaces.I_Medico;
+
+@WebServlet("/ServletMedico")
+public class ServletMedico extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ServletServicio() {
+    private static final int BUSCAR_MEDICO = 0;
+	
+    public ServletMedico() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
-    public static final int BUSCAR_SERVICIO = 0;
-    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int key = Integer.parseInt(request.getParameter("key"));
-		String letra  = String.valueOf(request.getParameter("letra"));
-		
+		String codServ  = String.valueOf(request.getParameter("codServ"));
+		String nombre = String.valueOf(request.getParameter("nombre"));
 		
 		switch (key) {
-		case BUSCAR_SERVICIO:
+		case BUSCAR_MEDICO:
 			
 			PrintWriter out = response.getWriter();
 			try {
 				
 				
 				DAOFactory dao =  DAOFactory.getDaoFactory(DAOFactory.MySql);
-				List<BeanServicio> servicios = new ArrayList<BeanServicio>();
-				I_Servicio servicioDao = dao.getServicio();
-				servicios= servicioDao.buscarServicio(letra);
+				List<BeanMedico> medicos= new ArrayList<BeanMedico>();
+				I_Medico medicoDao = dao.getMedico();
+				medicos= medicoDao.buscarMedicoXServicio(codServ, nombre);
 				
-		        //Gson gson = new GsonBuilder().create();
 		        
+				List<Map<String, String>> listMedicosJson = new ArrayList<Map<String, String>>();
 				
-				List<Map<String, String>> listServiciosJson = new ArrayList<Map<String, String>>();
-				
-				for (BeanServicio servicio : servicios) {
+				for (BeanMedico medico : medicos) {
 					Map<String, String> mapJson = new HashMap<String, String>();
-					mapJson.put("idServicio", String.valueOf(servicio.getIdServicio()));
-					mapJson.put("nomServ", servicio.getNomServ());
-					mapJson.put("cost", String.valueOf(servicio.getCost()));
-					mapJson.put("descr", servicio.getDescr());
-					listServiciosJson.add(mapJson);
+					mapJson.put("idMed",String.valueOf(medico.getIdMed()));
+					mapJson.put("nombre", medico.getNombre());
+					mapJson.put("apePat",medico.getApePat());
+					mapJson.put("apeMat",medico.getApeMat());
+					mapJson.put("horario", medico.getHorario());
+					mapJson.put("cap", String.valueOf(medico.getCap()));
+					listMedicosJson.add(mapJson);
 				}
 				
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
-				response.getWriter().write(new Gson().toJson(listServiciosJson));
+				response.getWriter().write(new Gson().toJson(listMedicosJson));
 			
 			
 			} catch (Exception e) {
@@ -83,10 +82,11 @@ public class ServletServicio extends HttpServlet {
 		default:
 			break;
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
 	}
 
 }

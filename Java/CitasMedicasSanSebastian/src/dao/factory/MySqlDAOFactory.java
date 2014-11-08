@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 import dao.interfaces.I_GenerarCM;
+import dao.interfaces.I_Medico;
 import dao.interfaces.I_Servicio;
 import dao.mysql.MySQLGenerarCMDao;
+import dao.mysql.MySQLMedicoDao;
 import dao.mysql.MySQLServicioDao;
 
 public class MySqlDAOFactory extends DAOFactory{
@@ -16,7 +18,7 @@ public class MySqlDAOFactory extends DAOFactory{
 			Class.forName("com.mysql.jdbc.Driver");
 
 			String url = "jdbc:mysql://localhost:3306/citasmedicas";
-			con = DriverManager.getConnection(url, "root", "software");
+			con = DriverManager.getConnection(url, "root", "root");
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.print(e.getMessage());
@@ -33,6 +35,11 @@ public class MySqlDAOFactory extends DAOFactory{
 	@Override
 	public I_Servicio getServicio() {
 		return new MySQLServicioDao();
+	}
+	
+	@Override
+	public I_Medico getMedico() {
+		return new MySQLMedicoDao();
 	}
 	
 }

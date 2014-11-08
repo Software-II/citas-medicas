@@ -9,8 +9,9 @@ Generar Citas Medicas V.3
 	<title>gui</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/fonts.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script type="text/javascript" src="js/nav.js"></script>
+<!-- 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/GenerarCM.js"></script>
 </head>
 <body>
 	<section>
@@ -32,7 +33,7 @@ Generar Citas Medicas V.3
 			</div>
 			<div class="row">
 				<div class="item1">M&eacute;dico: <strong id="medico"></strong></div>
-				<div class="item2"><div onclick="openBuscarMedico()" class="botonMenu">Buscar M&eacute;dico</div></div>
+				<div class="item2"><div onclick="openBuscarMedico()" class="botonMenu" >Buscar M&eacute;dico</div></div>
 			</div>
 			<div class="row">
 				<div class="item1">Fecha: <strong id="fecha-cita"></strong></div>
@@ -65,15 +66,18 @@ Generar Citas Medicas V.3
 	<section id="ventana-buscar-medico">
 		<p class="bienvenido">Centro de Salud San Sebastian</p>
 		<div class="contenedor">
-			<div class="row">
+			<div class="row" >
 				<div class="item1">Servicio: <strong id="servicio-seleccionado"></strong></div>
 				<div class="item2"><div onclick="closeBuscarMedico()" class="botonMenu">Salir</div></div>
 			</div>
 			<div class="row">
-				<div class="item1"><input type="text" id="servicio-a-buscar"></div>
-				<div class="item2"><div onclick="buscarServicio()" class="botonMenu">Buscar</div></div>
+				<div class="item1"><input type="text" id="medico-a-buscar"></div>
+				<div class="item2"><div onclick="buscarMedico()" class="botonMenu">Buscar M&eacute;dico</div></div>
 			</div>
 			
+			<div class="row" id="lista-medicos" style="max-height: 145%;">
+				
+			</div>
 		</div>
 	</section>
 
