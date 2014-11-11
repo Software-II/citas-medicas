@@ -3,10 +3,12 @@ package dao.factory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-import dao.interfaces.I_GenerarCM;
+import dao.interfaces.I_CM;
+import dao.interfaces.I_HistoriaMedica;
 import dao.interfaces.I_Medico;
 import dao.interfaces.I_Servicio;
-import dao.mysql.MySQLGenerarCMDao;
+import dao.interfaces.I_ValidarDatos;
+import dao.mysql.MySQLCMDao;
 import dao.mysql.MySQLMedicoDao;
 import dao.mysql.MySQLServicioDao;
 
@@ -28,8 +30,8 @@ public class MySqlDAOFactory extends DAOFactory{
 	}
 
 	@Override
-	public I_GenerarCM getCMDao() {
-		return new MySQLGenerarCMDao();
+	public I_CM getCMDao() {
+		return new MySQLCMDao();
 	}
 
 	@Override
@@ -40,6 +42,18 @@ public class MySqlDAOFactory extends DAOFactory{
 	@Override
 	public I_Medico getMedico() {
 		return new MySQLMedicoDao();
+	}
+
+	@Override
+	public I_HistoriaMedica getHistoriaMedica() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public I_ValidarDatos getValidarDatos() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

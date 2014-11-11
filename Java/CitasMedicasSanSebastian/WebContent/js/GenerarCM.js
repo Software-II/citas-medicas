@@ -2,6 +2,8 @@ var idServicioSelected = "";
 var idMedicoSelected = "";
 var responseService;
 var responseMedico;
+var n;
+
 
 function openBuscarServicio () {
 	$("#ventana-buscar-servicio").animate({top: '10%'});
@@ -50,14 +52,12 @@ function buscarServicio() {
         },
 		error: function(response){
 			console.log("damm");
-		}
-	
-	});
+		}	});
 }
 
-function getServicio(i){
+function getServicio(i){ 
 	closeBuscarServicio ();
-	idServicioSelected=responseService[i].idServicio;
+	idServicioSelected=responseService[i].idServicio;  
 	$("#servicio").append(responseService[i].nomServ);
 	$("#costo-servicio").append(responseService[i].cost);
 }
@@ -74,6 +74,7 @@ function buscarMedico(){
 			"codServ"  : idServicioSelected,
 			"key":0
 		};
+	
 	$.ajax({
          url:   'ServletMedico',
          type:  'GET',
@@ -93,6 +94,14 @@ function buscarMedico(){
         		 html+='<div style="background: rgba(120, 49, 49, 1); color: #fff; border-radius: 10px; padding: 5px; cursor: pointer;" onclick="getMedico('+i+')">Selecciona M&eacute;dico</div>';
         		 html+='</div>';
         		 
+        		 
+        		 var d = new Date();
+        		  n= (d.getFullYear()+"/"+(d.getMonth()+1)+"/"+d.getDay()+9);
+        		 
+        		 $("#fecha-cita").text(n);
+        		 $("#hora-cita").text(d.getHours()+":"+d.getMinutes());
+        		 
+        		 
         	 });
         	 $("#lista-medicos").append(html);
         },
@@ -109,7 +118,42 @@ function getMedico(i){
 	$("#medico").append(responseMedico[i].nombre+" "+responseMedico[i].apePat+" "+responseMedico[i].apeMat );
 }
 
-function salir(){
-	window.open("http://localhost:8080/CitasMedicasSanSebastian/MenuPpalP.jsp","_self");
+function salir(tipo,dni){
+	
+	window.open("validarDatos?tipo="+tipo+"&dni="+dni+"","_self");
 }
 
+
+function generarCitaMedica(){
+	
+
+	var dataMedico = {
+			"idMed"   :idMedicoSelected,
+			"idServ"  : idServicioSelected,
+			"idPac"  : $("#idpac").text(),
+			"fecha"  : n,
+			"key":0
+		};
+	$.ajax({
+         url:   'ServletCM',
+         type:  'GET',
+         dataType: "json",
+         data: dataMedico,
+         success:  function (response) {
+        	 if(response[0].resssult==1){
+        		 alert("La cita Medica se genero con éxito"); 
+        		 window.open("http://localhost:8080/CitasMedicasSanSebastian/MenuPpalP.jsp","_self");
+        		 
+        	 }else{
+        		 alert("No se genero la cita");  
+        	 }
+        	 
+         
+         },
+		error: function(response){
+			alert("Erro server");
+		}
+	
+	});
+	
+}

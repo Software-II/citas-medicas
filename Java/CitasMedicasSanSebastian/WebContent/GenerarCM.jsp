@@ -14,6 +14,8 @@ Generar Citas Medicas V.3
 	<script type="text/javascript" src="js/GenerarCM.js"></script>
 </head>
 <body>
+<!-- [ingresar el id del paciente] -->
+<div id="idpac" style="display:none;">3</div>
 	<section>
 		<div class="cen"></div>
 		<div class="min"></div>
